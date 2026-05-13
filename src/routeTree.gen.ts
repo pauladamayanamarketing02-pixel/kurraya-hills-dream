@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WeddingMeetingRouteImport } from './routes/wedding-meeting'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RoomsRouteImport } from './routes/rooms'
 import { Route as RomanticRouteImport } from './routes/romantic'
 import { Route as RestaurantPoolRouteImport } from './routes/restaurant-pool'
@@ -20,6 +21,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const WeddingMeetingRoute = WeddingMeetingRouteImport.update({
   id: '/wedding-meeting',
   path: '/wedding-meeting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoomsRoute = RoomsRouteImport.update({
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/restaurant-pool': typeof RestaurantPoolRoute
   '/romantic': typeof RomanticRoute
   '/rooms': typeof RoomsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wedding-meeting': typeof WeddingMeetingRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/restaurant-pool': typeof RestaurantPoolRoute
   '/romantic': typeof RomanticRoute
   '/rooms': typeof RoomsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wedding-meeting': typeof WeddingMeetingRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/restaurant-pool': typeof RestaurantPoolRoute
   '/romantic': typeof RomanticRoute
   '/rooms': typeof RoomsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wedding-meeting': typeof WeddingMeetingRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/restaurant-pool'
     | '/romantic'
     | '/rooms'
+    | '/sitemap.xml'
     | '/wedding-meeting'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/restaurant-pool'
     | '/romantic'
     | '/rooms'
+    | '/sitemap.xml'
     | '/wedding-meeting'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/restaurant-pool'
     | '/romantic'
     | '/rooms'
+    | '/sitemap.xml'
     | '/wedding-meeting'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   RestaurantPoolRoute: typeof RestaurantPoolRoute
   RomanticRoute: typeof RomanticRoute
   RoomsRoute: typeof RoomsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WeddingMeetingRoute: typeof WeddingMeetingRoute
 }
 
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/wedding-meeting'
       fullPath: '/wedding-meeting'
       preLoaderRoute: typeof WeddingMeetingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rooms': {
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   RestaurantPoolRoute: RestaurantPoolRoute,
   RomanticRoute: RomanticRoute,
   RoomsRoute: RoomsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   WeddingMeetingRoute: WeddingMeetingRoute,
 }
 export const routeTree = rootRouteImport
